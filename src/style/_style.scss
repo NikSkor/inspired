@@ -1,0 +1,14 @@
+body {
+  background-color: $back;
+  color: $text;
+  margin-top: 50px;
+  font-family: 'Montserrat';
+}
+
+.image {
+  width: 300px;
+  height: 500px;
+  background-size: cover;
+  background-image: url('img/1.jpg');
+  margin-left: 30px;
+}
