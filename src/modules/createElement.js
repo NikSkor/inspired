@@ -6,18 +6,18 @@ export const createElement = (tag, attr, {append, appends, parent, cb} = {}) => 
   }
 
   if(append && append instanceof HTMLElement) {
-    element.append(append)
+    element.append(append);
   }
 
   if(appends && appends.every(item => item instanceof HTMLElement)) {
     element.append(...appends);
   }
 
-  if (parent & parent instanceof HTMLElement) {
+  if (parent && parent instanceof HTMLElement) {
     parent.append(element);
   }
 
-  if (cb & typeof cb === 'function') {
+  if (cb && typeof cb === 'function') {
     cb(element);
   }
 
