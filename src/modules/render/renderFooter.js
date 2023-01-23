@@ -1,30 +1,37 @@
+import { API_URL, DATA } from "../const";
 import { createElement } from "../createElement";
-import { dataNavigation } from "../dataNavigation";
+import { getData } from "../getData";
 
-export const renderFooter = () => {
+const container = createElement(
+  'div',
+  {
+    className: 'container',
+  }
+);
+
+const footerContainer = createElement(
+  'div',
+  {
+    className: 'footer__container',
+  },
+  {
+    parent: container,
+  }
+);
+
+export const renderFooter = async () => {
   const footer = document.querySelector('.footer');
 
   footer.textContent = '';
 
-  const container = createElement(
-    'div',
-    {
-      className: 'container',
-    },
-    {
-      parent: footer,
-    }
-  );
+  DATA.categories = await getData(`${API_URL}/api/categories`);
 
-  const footerContainer = createElement(
-    'div',
-    {
-      className: 'footer__container',
-    },
-    {
-      parent: container,
-    }
-  );
+  const genders = Object.keys(DATA.categories);
+
+  // console.log('DATA.categories: ', DATA.categories);
+
+  footer.append(container);
+
 
   const footerCategory = createElement(
     'div',
@@ -41,7 +48,7 @@ export const renderFooter = () => {
   );
 
   const sublistGenerator = (gender) => {
-    const elems = dataNavigation[gender].list.map((item) =>
+    const elems = DATA.categories[gender].list.map((item) =>
       createElement(
         'li',
         {
@@ -51,22 +58,22 @@ export const renderFooter = () => {
           append: createElement('a', {
             className: 'footer__link footer-category__link',
             textContent: item.title,
-            href: '#'
+            href: `#/categories/${item.slug}`,
           }),
         }
       )
-    )
+    );
     return elems;
   }
 
-  createElement(
+  const footerCategoryList = createElement(
     'ul',
     {
       className: 'footer-category__list',
     },
     {
       parent: footerCategory,
-      appends: [
+      appends: genders.map((gender) =>
         createElement(
           'li',
           {
@@ -82,8 +89,8 @@ export const renderFooter = () => {
                 {
                   append: createElement('a', {
                     className: 'footer__link',
-                    textContent: `${dataNavigation.women.title}`,
-                    href: '#',
+                    textContent: `${DATA.categories[gender].title}`,
+                    href: `#/${gender}`,
                   }),
                 }
               ),
@@ -93,47 +100,16 @@ export const renderFooter = () => {
                   className: 'footer-category__sublist',
                 },
                 {
-                  appends: sublistGenerator('women'),
+                  appends: sublistGenerator(gender),
                 }
               ),
             ],
           }
-        ),
-        createElement(
-          'li',
-          {
-            className: 'footer-category__item',
-          },
-          {
-            appends: [
-              createElement(
-                'h3',
-                {
-                  className: 'footer-category__subtitle',
-                },
-                {
-                  append: createElement('a', {
-                    className: 'footer__link',
-                    textContent: `${dataNavigation.men.title}`,
-                    href: '#',
-                  }),
-                }
-              ),
-              createElement(
-                'ul',
-                {
-                  className: 'footer-category__sublist',
-                },
-                {
-                  appends: sublistGenerator('men'),
-                }
-              ),
-            ],
-          }
-        ),
-      ],
+        )
+      ),
     }
   );
+
   const footerSocial = createElement(
     'div',
     {
