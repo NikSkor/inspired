@@ -13,7 +13,7 @@
     margin-bottom: 24px;
   }
   
-  &__woman {
+  &__women {
     background-image: url('img/bg-woman.jpg');
 
     @include laptop {
@@ -29,7 +29,7 @@
     }
   }
 
-  &__man {
+  &__men {
     background-image: url('img/bg-man.jpg');
 
     @include laptop {

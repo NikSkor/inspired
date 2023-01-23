@@ -1,5 +1,5 @@
 export const dataNavigation = {
-  woman: {
+  women: {
     title: 'Женское',
     list: [
       {
@@ -28,7 +28,7 @@ export const dataNavigation = {
       },
     ],
   },
-  man: {
+  men: {
     title: 'Мужское',
     list: [
       {

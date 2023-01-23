@@ -82,7 +82,7 @@ export const renderFooter = () => {
                 {
                   append: createElement('a', {
                     className: 'footer__link',
-                    textContent: `${dataNavigation.woman.title}`,
+                    textContent: `${dataNavigation.women.title}`,
                     href: '#',
                   }),
                 }
@@ -93,7 +93,7 @@ export const renderFooter = () => {
                   className: 'footer-category__sublist',
                 },
                 {
-                  appends: sublistGenerator('woman'),
+                  appends: sublistGenerator('women'),
                 }
               ),
             ],
@@ -114,7 +114,7 @@ export const renderFooter = () => {
                 {
                   append: createElement('a', {
                     className: 'footer__link',
-                    textContent: `${dataNavigation.man.title}`,
+                    textContent: `${dataNavigation.men.title}`,
                     href: '#',
                   }),
                 }
@@ -125,7 +125,7 @@ export const renderFooter = () => {
                   className: 'footer-category__sublist',
                 },
                 {
-                  appends: sublistGenerator('man'),
+                  appends: sublistGenerator('men'),
                 }
               ),
             ],

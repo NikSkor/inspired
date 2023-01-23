@@ -1,5 +1,5 @@
+import { DATA } from "../const";
 import { createElement } from "../createElement";
-import { dataNavigation } from "../dataNavigation";
 
 export const renderNavigation = (gender) => {
   const navigation = document.querySelector('.navigation');
@@ -19,12 +19,12 @@ export const renderNavigation = (gender) => {
     parent: container,
   });
 
-  for (const genderName in dataNavigation) {
+  for (const genderName in DATA.navigation) {
     createElement('a', {
       className: `gender__link 
         ${gender === genderName ? 'gender__link_active' : ''}`,
       href: `#/${genderName}`,
-      textContent: dataNavigation[genderName].title,
+      textContent: DATA.navigation[genderName].title,
     }, {
       parent: createElement('li', {
         className: 'gender__item',
@@ -34,7 +34,7 @@ export const renderNavigation = (gender) => {
     })
   };
 
-  const categoryElems = dataNavigation[gender].list.map((item) =>
+  const categoryElems = DATA.navigation[gender].list.map((item) =>
     createElement(
       'li',
       {

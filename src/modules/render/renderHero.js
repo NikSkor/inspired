@@ -1,4 +1,35 @@
+import { TITLE } from "../const";
 import { createElement } from "../createElement";
+
+  const container = createElement(
+    'div',
+    {
+      className: 'container',
+    },
+  );
+
+  const content = createElement('div', {
+    className: 'hero__content',
+  },{
+    parent: container,
+  });
+
+  const titleElem = createElement('h2', {
+    className: 'hero__title',
+  }, {
+    parent: content,
+  });
+
+  const heroLink = createElement(
+    'a',
+    {
+      className: 'hero__link',
+      textContent: 'Перейти',
+    },
+    {
+      parent: content,
+    }
+  );
 
 export const renderHero = (gender) => {
   const hero = document.querySelector('.hero');
@@ -14,46 +45,17 @@ export const renderHero = (gender) => {
 
   hero.className = `hero hero__${gender}`;
 
-  const container = createElement(
-    'div',
-    {
-      className: 'container',
-    },
-    {
-      parent: hero,
-    }
-  );
+  hero.append(container);
 
-  createElement(
-    'div',
-    {
-      className: 'hero__content',
-    },
-    {
-      parent: container,
-      appends: [
-        createElement('h2', {
-          className: 'hero__title',
-          textContent: (gender === 'woman') ? 
-          'Новая коллекция Бюстгальтер-балконет'
-          :
-          'Боксеры из новой коллекции'
-          ,
-        }),
-        createElement('a', {
-          className: 'hero__link',
-          textContent: 'Перейти',
-          href: '#'
-        }),
-      ],
-    }
-  );
-`
+  titleElem.textContent = TITLE[gender].title;
+  heroLink.href = `#/goods/${TITLE[gender].id}`;
+  
+  `
 // <div class="container">
 //   <div class="hero__content">
 //     <h2 class="hero__title">Новая коллекция Бюстгальтер-балконет</h2>
 //     <a href="#" class="hero__link">Перейти</a>
 //   </div>
 // </div>
-// `
+// `;
 };
