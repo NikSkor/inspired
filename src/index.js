@@ -36,6 +36,10 @@ const init = async () => {
       menMainPage();
     });
 
+    router.on('search', (data) => {
+      console.log(data.params.value);
+    });
+
     // setTimeout(() => {
     //   router.navigate('men');
     // }, 3000)
