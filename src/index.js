@@ -36,6 +36,13 @@ const init = async () => {
       menMainPage();
     });
 
+    router.on('/:gender/:category', (routerData) => {
+      const {gender, category} = routerData.data;
+      const params = {gender, category};
+
+      
+    });
+
     router.on('search', (data) => {
       console.log(data.params.value);
     });
