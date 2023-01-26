@@ -1,0 +1,25 @@
+.pagination {
+  &__arrow {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    color: $main-color;
+
+    &_start {
+      background-image: url('img/arrow-left.svg');
+    }
+
+    &_end {
+      background-image: url('img/arrow-right.svg');
+    }
+
+    &_disabled {
+      pointer-events: none;
+      cursor: default;
+      fill: $gray;
+    }
+  }
+}
