@@ -1,6 +1,7 @@
-import { API_URL, DATA } from "../const";
+import { API_URL, COUNT__PAGINATION, DATA } from "../const";
 import { createElement } from "../createElement";
 import { getData } from "../getData";
+import { renderPagination } from "./renderPagination";
 
 
 
@@ -10,7 +11,9 @@ export const renderGoods = async (title, params) => {
 
   goods.textContent = '';
 
-  const products = await getData(`${API_URL}/api/goods`, params);
+  const data = await getData(`${API_URL}/api/goods`, params);
+
+  const products = Array.isArray(data) ? data: data.goods;
 
   const container = createElement('div', {
     className: 'container',
@@ -91,6 +94,16 @@ export const renderGoods = async (title, params) => {
       appends: listCard,
     }
   );
+
+  if (data.pages && data.pages > 1) {
+    const pagination = createElement('div', {
+      className: 'goods__pagination pagination',
+    }, {
+      parent: container,
+    })
+
+    renderPagination(pagination, data.page, data.pages, COUNT__PAGINATION);
+  }
 
   // goods.innerHTML = `
   //   <div class="container">
