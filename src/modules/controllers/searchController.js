@@ -1,4 +1,4 @@
-import { router } from "../router";
+import { router } from "../utils/router";
 
 export const searchController = formSearch => {
   formSearch.addEventListener('submit', (e) => {

@@ -1,5 +1,5 @@
 import { API_URL, DATA } from "../const";
-import { createElement } from "../createElement";
+import { createElement } from "../utils/createElement";
 import { getData } from "../getData";
 
 const container = createElement('div', {

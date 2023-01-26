@@ -1,11 +1,11 @@
-import { DATA } from './const';
-import { renderGoods } from './render/renderGoods';
-import { renderHero } from './render/renderHero';
-import { renderNavigation } from './render/renderNavigation';
+import { DATA } from '../const';
+import { renderGoods } from '../render/renderGoods';
+import { renderHero } from '../render/renderHero';
+import { renderNavigation } from '../render/renderNavigation';
 
-export const categoryPage = (routerData) => {
+export const categoryPageController = (routerData) => {
   const { gender, category } = routerData.data;
-  const params = { gender, category };
+  const params = { gender, category, count: 8 };
 
   if (routerData.params?.page) {
     params.page = routerData.params?.page;
