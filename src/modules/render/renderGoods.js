@@ -1,17 +1,17 @@
-import { API_URL, COUNT__PAGINATION, DATA } from "../const";
+import { API_URL, COUNT__PAGINATION, DATA, goods } from "../const";
 import { createElement } from "../utils/createElement";
 import { getData } from "../getData";
 import { renderPagination } from "./renderPagination";
+import { getFavorite } from "../controllers/favoriteController";
 
 
 
 export const renderGoods = async (title, params) => {
 
-  const goods = document.querySelector('.goods');
-
   goods.textContent = '';
 
   const data = await getData(`${API_URL}/api/goods`, params);
+  console.log('data: ', data);
 
   const products = Array.isArray(data) ? data: data.goods;
 
@@ -21,7 +21,7 @@ export const renderGoods = async (title, params) => {
     parent: goods,
   });
   
-  createElement(
+  const goodsTitle = createElement(
     'h2',
     {
       className: 'goods__title',
@@ -32,6 +32,31 @@ export const renderGoods = async (title, params) => {
     }
   );
 
+    if (Object.hasOwn(data, 'totalCount')) {
+      createElement(
+        'sup',
+        {
+          className: 'goods__title-sup',
+          innerHTML: `&nbsp(${data?.totalCount})`,
+        },
+        {
+          parent: goodsTitle,
+        }
+      );
+
+      if (!data.totalCount) {
+        createElement('p', {
+          className: 'goods__warning',
+          textContent: 'По вашему запросу ничего не найдено.'
+        }, {
+          parent: container,
+        })
+        return;
+      }
+    };
+
+    const favoriteList = getFavorite();
+    
   const listCard = products.map((product) => {
     const li = createElement('li', {
       className: 'goods__item',
@@ -53,7 +78,8 @@ export const renderGoods = async (title, params) => {
         <div class="product__row">
           <p class="product__price">руб ${product.price}</p>
           <button
-            class="product__btn-favorite"
+            class="product__btn-favorite favorite
+            ${favoriteList.includes(product.id) ? 'favorite_active' : ''}"
             data-id="${product.id}"
             aria-label="Добавить в избранное"
           ></button>

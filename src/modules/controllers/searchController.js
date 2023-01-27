@@ -5,5 +5,7 @@ export const searchController = formSearch => {
     e.preventDefault();
 
     router.navigate(`search?value=${formSearch.search.value}`);
+
+    formSearch.search.value = '';
   })
 };
