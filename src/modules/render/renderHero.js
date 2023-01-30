@@ -1,5 +1,5 @@
-import { TITLE } from "../const";
-import { createElement } from "../createElement";
+import { hero, TITLE } from "../const";
+import { createElement } from "../utils/createElement";
 
   const container = createElement(
     'div',
@@ -32,8 +32,7 @@ import { createElement } from "../createElement";
   );
 
 export const renderHero = (gender) => {
-  const hero = document.querySelector('.hero');
-
+  
   hero.textContent = '';
 
   if (!gender) {

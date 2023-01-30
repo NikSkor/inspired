@@ -1,14 +1,12 @@
-import { API_URL, DATA } from "../const";
-import { createElement } from "../createElement";
-import { getData } from "../getData";
+import { DATA, footer } from "../const";
+import { createElement } from "../utils/createElement";
 
 const container = createElement('div', {
   className: 'container footer__container',
 });
 
 export const renderFooter = async () => {
-  const footer = document.querySelector('.footer');
-
+  
   footer.textContent = '';
 
   // DATA.categories = await getData(`${API_URL}/api/categories`);

@@ -1,7 +1,8 @@
-import { createElement } from "../createElement";
-import { router } from "../router";
+import { createElement } from "../utils/createElement";
+import { getUrl } from "../utils/getUrl";
 
 export const renderPagination = (wrapperPagination, page, pages, count) => {
+
   wrapperPagination.textContent = '';
 
   const paginationList = createElement('ul', {
@@ -11,14 +12,16 @@ export const renderPagination = (wrapperPagination, page, pages, count) => {
   });
 
   const isNotStart = page - Math.floor(count / 2) > 1;
-  const isEnd = page + Math.floor(count / 2) > pages;
+  const isEnd = page + Math.floor(count / 2) >= pages;
 
   if (count > pages) {
     count = pages;
   }
 
-  for(let i = 0; i < count; i++) {
+  for (let i = 0; i < count; i++) {
     let n = i + 1;
+
+  if (pages < count) return;
 
     if (isNotStart) {
       if (isEnd) {
@@ -40,7 +43,7 @@ export const renderPagination = (wrapperPagination, page, pages, count) => {
         ${page === n ? 'pagination__link_active' : ''}
         `,
           textContent: n,
-          href: `${router.getCurrentLocation().url}?page=${n}`,
+          href: getUrl({page: n}),
         }),
       }
     );
@@ -53,7 +56,7 @@ export const renderPagination = (wrapperPagination, page, pages, count) => {
         className: `pagination__arrow pagination__arrow_start ${
           isNotStart ? '' : 'pagination__arrow_disabled'
         }`,
-        href: `${router.getCurrentLocation().url}?page=${1}`,
+        href: getUrl({page: 1}),
         ariaLabel: 'В начало',
         innerHTML: `
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,7 +76,7 @@ export const renderPagination = (wrapperPagination, page, pages, count) => {
         className: `pagination__arrow pagination__arrow_end ${
           isEnd ? 'pagination__arrow_disabled' : ''
         }`,
-        href: `${router.getCurrentLocation().url}?page=${pages}`,
+        href: getUrl({page: pages}),
         ariaLabel: 'В конец',
         innerHTML: `
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
