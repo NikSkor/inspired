@@ -7,7 +7,7 @@
     "start": "webpack serve",
     "build:dev": "webpack",
     "build:prod": "webpack --node-env=production",
-    "clean": "rd /s /q dist"
+    "clean": "rd /s /q public"
   },
   "keywords": [],
   "author": "Nikita Skorodumov",
@@ -21,7 +21,6 @@
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
     "babel-loader": "^9.1.2",
-    "clean": "^4.0.2",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
     "html-loader": "^4.2.0",
